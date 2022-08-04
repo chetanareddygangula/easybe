@@ -19,18 +19,17 @@ uploaded_file = st.file_uploader(
                          type=['csv', 'xlsx'])
 global df
 if uploaded_file is not None:
-    print(uploaded_file)
-    print("hello")
-
-    try:
-        df = pd.read_csv(uploaded_file)
-    except Exception as e:
-        print(e)
-        df = pd.read_excel(uploaded_file)
+        print(uploaded_file)
+        print("hello")
+        try:
+            df = pd.read_csv(uploaded_file)
+        except Exception as e:
+            print(e)
+            df = pd.read_excel(uploaded_file)
 
 # 1. as sidebar menu
 with st.sidebar:
-    selected2 = option_menu("Main Menu", ["Home","Upload","Analysis","Visualize", 'Settings'],
+    selected2 = option_menu("Main Menu", ["Home","Analysis","Visualize", 'Settings'],
         icons=['house', "upload","list-task","phone",'gear'], menu_icon="cast", default_index=1)
 
 
@@ -44,7 +43,9 @@ if selected2=="Home":
 
     st.image(image,width=1000)
 
+
 if selected2=="Analysis":
+
 
             
 
@@ -100,6 +101,7 @@ if selected2=="Analysis":
             fn2 = float(fn2)
             df3 = df[df[z] == fn2]
             st.write(df3)
+            
     #null values    
     if uploaded_file is not None:
         test=df.isnull().values.any()
@@ -114,9 +116,17 @@ if selected2=="Analysis":
                      ("Select One","Yes","No","Replace Values"))
             if dup=="Yes":
                 df=df.dropna(inplace=True)
-                st.write("Null Values are Removed")    
+                st.write("Null Values are Removed")  
+                if st.checkbox("View dataset"):
+                    st.write(df)  
             if dup=="No":
                 st.write("Ok No Problem!!!")
+            if dup=="Replace Values":
+                a=st.text_input("Enter the value to be replaced");
+                df=df.fillna(a)
+                if st.checkbox("View dataset"):
+                    st.write(df)
+                
         else:
             st.warning("No null values...")
             
@@ -135,12 +145,12 @@ if selected2=="Analysis":
         else:
             st.warning("No Duplicate values...")
             #add rows
-    if st.checkbox("Add row"):
-        x = st.selectbox('Select the colum to add a row',list(df.columns))
-        y=st.text_input("Enter the value to add")
-        df4=df.append({x:y},ignore_index=True)
-        df4=float(df4)
-        st.write(df4)
+    #if st.checkbox("Add row"):
+     #   x = st.selectbox('Select the colum to add a row',list(df.columns))
+      #  y=st.text_input("Enter the value to add")
+       # df4=df.append({x:y},ignore_index=True)
+        #df4=float(df4)
+        #st.write(df4)
         
      # 8. Get Overall Statistics
 
@@ -148,7 +158,7 @@ if selected2=="Analysis":
         st.write(df.describe(include='all'))
         
 if selected2=="Visualize":
-
+    
 
 
 
