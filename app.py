@@ -35,13 +35,13 @@ with st.sidebar:
 
 if selected2=="Home":
     #st.title("EasyBe")
-    image="logo.png"
+    
 
     #st.image(image, width=200)
     #si=st.write('<p style="font-family:Math;font-weight: bold;text-transform:uppercase; color:#DC143C; font-size: 80px;">EasyBe</p>',unsafe_allow_html=True)
     #st.write("a logo and text next to eachother")
 
-    st.image(image,width=1000)
+    st.write("WELCOME TO EASYBE")
 
 
 if selected2=="Analysis":
