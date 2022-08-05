@@ -35,13 +35,13 @@ with st.sidebar:
 
 if selected2=="Home":
     #st.title("EasyBe")
-    
+    image="logo.png"
 
     #st.image(image, width=200)
     #si=st.write('<p style="font-family:Math;font-weight: bold;text-transform:uppercase; color:#DC143C; font-size: 80px;">EasyBe</p>',unsafe_allow_html=True)
     #st.write("a logo and text next to eachother")
 
-    st.write("WELCOME TO EASYBE")
+    st.image(image,width=1000)
 
 
 if selected2=="Analysis":
@@ -54,8 +54,14 @@ if selected2=="Analysis":
         st.write(df)
     #Shape of Our Dataset (Number of Rows And Number of Columns)
     if st.checkbox("Show number of rows and columns "):
-        st.warning(f'Rows : {df.shape[0]}')
-        st.warning(f'Columns : {df.shape[1]}')
+        st.success(f'Rows : {df.shape[0]}')
+        st.success(f'Columns : {df.shape[1]}')
+        
+    if st.checkbox("Show Dataset with selected number of rows"):
+        st.write("### Enter the number of rows to view")
+        rows = st.number_input("", min_value=0,value=3)
+        if rows > 0:
+            st.dataframe(df.head(rows))
         
      # get the list of columns
     if st.checkbox(" Show dataset with selected columns"):
@@ -117,15 +123,13 @@ if selected2=="Analysis":
             if dup=="Yes":
                 df=df.dropna(inplace=True)
                 st.write("Null Values are Removed")  
-                if st.checkbox("View dataset"):
-                    st.write(df)  
+                  
             if dup=="No":
                 st.write("Ok No Problem!!!")
             if dup=="Replace Values":
                 a=st.text_input("Enter the value to be replaced");
                 df=df.fillna(a)
-                if st.checkbox("View dataset"):
-                    st.write(df)
+                
                 
         else:
             st.warning("No null values...")
